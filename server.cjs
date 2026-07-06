@@ -373,14 +373,41 @@ app.put("/api/records/:id", async (req, res) => {
 });
 app.delete("/api/records/:id", async (req, res) => {
   const db = readDb();
+  const index = db.records.findIndex(
+    (r) => r.id === req.params.id
+  );
+  if (index === -1) {
+    return res.status(404).json({
+      error: "Record not found"
+    });
+  }
+  const deleted = db.records.splice(index, 1)[0];
+  writeDb(db);
+  await triggerSheetsWebhook(
+    deleted,
+    "DELETE",
+    db.settings
+  );
+  res.json({
+    success: true,
+    deletedId: req.params.id
+  });
+});
+app.delete("/api/records/:id", async (req, res) => {
+  const db = readDb();
   const index = db.records.findIndex((r) => r.id === req.params.id);
   if (index === -1) {
-    return res.status(404).json({ error: "Record not found" });
+    return res.status(404).json({
+      error: "Record not found"
+    });
   }
   const deleted = db.records.splice(index, 1)[0];
   writeDb(db);
   await triggerSheetsWebhook(deleted, "DELETE", db.settings);
-  res.json({ success: true, deletedId: req.params.id });
+  res.json({
+    success: true,
+    deletedId: req.params.id
+  });
 });
 app.get("/api/settings", (req, res) => {
   const db = readDb();
