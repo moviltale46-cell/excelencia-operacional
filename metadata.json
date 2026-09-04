@@ -1,0 +1,6 @@
+{
+  "name": "Sistema de Excelencia Operacional - Legal y Ventas",
+  "description": "Plataforma de gestión de operaciones inmobiliarias para Administrador, Jefe de Ventas, Jefe Legal y Asistente Legal, con sincronización automática a Excel y panel de KPIs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
