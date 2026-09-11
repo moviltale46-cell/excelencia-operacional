@@ -1,0 +1,142 @@
+{
+  "entities": {
+    "operacion": {
+      "title": "Operacion",
+      "description": "Expedientes y operaciones legales de ventas",
+      "type": "object",
+      "properties": {
+        "IdOperacion": { "type": "string" },
+        "IdProyecto": { "type": "string" },
+        "Proyecto": { "type": "string" },
+        "IdEquipo": { "type": "string" },
+        "Team": { "type": "string" },
+        "Dpto": { "type": "string" },
+        "Estacionamiento": { "type": "string" },
+        "Deposito": { "type": "string" },
+        "Asesor": { "type": "string" },
+        "NombreAsesor": { "type": "string" },
+        "TipoOperacion": { "type": "string" },
+        "Tipo": { "type": "string" },
+        "FechaSolicitud": { "type": "string" },
+        "FechaEmision": { "type": "string" },
+        "Estado": { "type": "string" },
+        "Status": { "type": "string" },
+        "Comentario": { "type": "string" },
+        "DerivadoA": { "type": "string" },
+        "UsuarioRegistro": { "type": "string" },
+        "FechaRegistro": { "type": "string" },
+        "UsuarioModificacion": { "type": "string" },
+        "FechaModificacion": { "type": "string" },
+        "Activo": { "type": "boolean" }
+      },
+      "required": ["IdOperacion"]
+    },
+    "usuario": {
+      "title": "Usuario",
+      "description": "Usuarios del sistema con roles y permisos",
+      "type": "object",
+      "properties": {
+        "IdUsuario": { "type": "string" },
+        "Usuario": { "type": "string" },
+        "Password": { "type": "string" },
+        "Nombre": { "type": "string" },
+        "Rol": { "type": "string" },
+        "Activo": { "type": "boolean" },
+        "Proyectos": { "type": "array" }
+      },
+      "required": ["IdUsuario", "Usuario", "Rol"]
+    },
+    "proyecto": {
+      "title": "Proyecto",
+      "description": "Proyectos inmobiliarios",
+      "type": "object",
+      "properties": {
+        "IdProyecto": { "type": "string" },
+        "NombreProyecto": { "type": "string" },
+        "IdEquipo": { "type": "string" },
+        "Activo": { "type": "boolean" }
+      },
+      "required": ["IdProyecto", "NombreProyecto"]
+    },
+    "equipo": {
+      "title": "Equipo",
+      "description": "Equipos de ventas",
+      "type": "object",
+      "properties": {
+        "IdEquipo": { "type": "string" },
+        "NombreEquipo": { "type": "string" },
+        "JefeVentas": { "type": "string" }
+      },
+      "required": ["IdEquipo", "NombreEquipo"]
+    },
+    "asesor": {
+      "title": "Asesor",
+      "description": "Asesores de ventas",
+      "type": "object",
+      "properties": {
+        "IdAsesor": { "type": "string" },
+        "Nombre": { "type": "string" },
+        "IdEquipo": { "type": "string" },
+        "Activo": { "type": "boolean" }
+      },
+      "required": ["IdAsesor", "Nombre"]
+    },
+    "historial": {
+      "title": "Historial",
+      "description": "Registro de cambios y observaciones por operación",
+      "type": "object",
+      "properties": {
+        "IdHistorial": { "type": "string" },
+        "IdOperacion": { "type": "string" },
+        "Estado": { "type": "string" },
+        "Comentario": { "type": "string" },
+        "UsuarioRegistro": { "type": "string" },
+        "FechaRegistro": { "type": "string" }
+      },
+      "required": ["IdHistorial", "IdOperacion"]
+    },
+    "configuracion": {
+      "title": "Configuracion",
+      "description": "Configuraciones globales del sistema",
+      "type": "object",
+      "properties": {
+        "platformName": { "type": "string" },
+        "platformLogo": { "type": "string" },
+        "jefeLegalEnabled": { "type": "boolean" },
+        "sharedExcelLink": { "type": "string" },
+        "sheetsWebhookUrl": { "type": "string" },
+        "kpiVisibility": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/operaciones/{operacionId}": {
+      "schema": "operacion",
+      "description": "Colección de operaciones y expedientes"
+    },
+    "/usuarios/{usuarioId}": {
+      "schema": "usuario",
+      "description": "Colección de cuentas de usuario"
+    },
+    "/proyectos/{proyectoId}": {
+      "schema": "proyecto",
+      "description": "Colección de proyectos inmobiliarios"
+    },
+    "/equipos/{equipoId}": {
+      "schema": "equipo",
+      "description": "Colección de equipos comerciales"
+    },
+    "/asesores/{asesorId}": {
+      "schema": "asesor",
+      "description": "Colección de asesores inmobiliarios"
+    },
+    "/historial/{historialId}": {
+      "schema": "historial",
+      "description": "Colección de bitácora histórica y auditoría"
+    },
+    "/configuracion/{configId}": {
+      "schema": "configuracion",
+      "description": "Parámetros de configuración"
+    }
+  }
+}
